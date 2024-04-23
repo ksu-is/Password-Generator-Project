@@ -1,16 +1,37 @@
 import random
 import string
 
-def generate_password(length):
+def generate_password(length, options):
     if length < 6:  # Minimum length check for security reasons
         print("Password length should be at least 6 characters.")
         return None
 
-    # Characters to generate password from
-    characters = string.ascii_letters + string.digits + string.punctuation
+    # Building the character set based on user preferences
+    characters = ''
+    if options['include_uppercase']:
+        characters += string.ascii_uppercase
+    if options['include_lowercase']:
+        characters += string.ascii_lowercase
+    if options['include_digits']:
+        characters += string.digits
+    if options['include_special']:
+        characters += string.punctuation
 
-    # Generating a random password
-    password = ''.join(random.choice(characters) for i in range(length))
+    # Check if the user has selected at least one character type
+    if not characters:
+        print("Please select at least one type of character for your password.")
+        return None
+
+    # Ensuring the password meets complexity requirements
+    while True:
+        password = ''.join(random.choice(characters) for i in range(length))
+        if (any(c.islower() for c in password) or not options['include_lowercase']) and \
+           (any(c.isupper() for c in password) or not options['include_uppercase']) and \
+           (any(c.isdigit() for c in password) or not options['include_digits']) and \
+           (any(c in string.punctuation for c in password) or not options['include_special']):
+            break  # The password is valid
+        else:
+            continue  # Regenerate if the password doesn't meet the criteria
 
     return password
 
