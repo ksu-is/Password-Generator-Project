@@ -18,3 +18,9 @@ for pwd in range(number):
         passwords += random.choice(chars)
     print(passwords)
     
+
+
+
+
+Citation for helping design my code and help with tkinter
+https://www.youtube.com/watch?v=HNEcKAdl6T4
