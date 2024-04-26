@@ -1,2 +1,2 @@
 # Password-Generator-Project
-This will be a project that creates a password for the user based off of user input. It will take in data from the user like length and create a secure randomly generated password.
+This will be a project that creates a password for the user based off of user input. It will take in data from the user to determine what ype of password the user would like. The user will have to decide the length, casing and special characters. I will be adding a simple interface so it is easier to interact with this program. The goal of this project is to make it easier for users to create a complex safe password with minimal effort.
