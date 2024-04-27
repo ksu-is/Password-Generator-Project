@@ -48,20 +48,26 @@ if not characters:
 root = tk.Tk()
 root.title("Password Generator")
 
-def main():
-    try:
-        length = int(input("Enter the desired length of the password (min 6 characters): "))
-        options = {
-            'include_uppercase': bool(int(input("Include uppercase letters? 1 for Yes, 0 for No: "))),
-            'include_lowercase': bool(int(input("Include lowercase letters? 1 for Yes, 0 for No: "))),
-            'include_digits': bool(int(input("Include digits? 1 for Yes, 0 for No: "))),
-            'include_special': bool(int(input("Include special characters? 1 for Yes, 0 for No: ")))
-        }
-        password = generate_password(length, options)
-        if password:
-            print("Generated Password:", password)
-    except ValueError:
-        print("Please enter valid inputs.")
+length_var = tk.StringVar()
+uppercase_var = tk.BooleanVar(value=True)
+lowercase_var = tk.BooleanVar(value=True)
+digits_var = tk.BooleanVar(value=True)
+special_var = tk.BooleanVar(value=True)
 
-if __name__ == "__main__":
-    main()
+# UI 
+tk.Label(root, text="Password Length:").grid(row=0, column=0)
+length_entry = tk.Entry(root, textvariable=length_var)
+length_entry.grid(row=0, column=1)
+
+tk.Checkbutton(root, text="Include Uppercase Letters", variable=uppercase_var).grid(row=1, column=0, columnspan=2, sticky='w')
+tk.Checkbutton(root, text="Include Lowercase Letters", variable=lowercase_var).grid(row=2, column=0, columnspan=2, sticky='w')
+tk.Checkbutton(root, text="Include Digits", variable=digits_var).grid(row=3, column=0, columnspan=2, sticky='w')
+tk.Checkbutton(root, text="Include Special Characters", variable=special_var).grid(row=4, column=0, columnspan=2, sticky='w')
+
+generate_button = tk.Button(root, text="Generate Password", command=generate_password)
+generate_button.grid(row=5, column=0, columnspan=2)
+
+password_entry = tk.Entry(root, width=20, font=('Arial', 14))
+password_entry.grid(row=6, column=0, columnspan=2)
+
+root.mainloop()
