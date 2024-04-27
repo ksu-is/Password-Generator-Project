@@ -6,41 +6,41 @@ import string
 def generate_password():
     try:
         length = int(length_var.get())
-        if length < 6:  # Minimum length to Increase security measures
+        if length < 6:  # Minimum length to increase security measures
             messagebox.showinfo("Error", "Password length should be at least 6 characters.")
             return
 
-    options = {
+        options = {
             'include_uppercase': uppercase_var.get(),
             'include_lowercase': lowercase_var.get(),
             'include_digits': digits_var.get(),
             'include_special': special_var.get()
         }
 
-    characters = ''
-    if options['include_uppercase']:
-        characters += string.ascii_uppercase
-    if options['include_lowercase']:
-        characters += string.ascii_lowercase
-    if options['include_digits']:
-        characters += string.digits
-    if options['include_special']:
-        characters += string.punctuation
+        characters = ''
+        if options['include_uppercase']:
+            characters += string.ascii_uppercase
+        if options['include_lowercase']:
+            characters += string.ascii_lowercase
+        if options['include_digits']:
+            characters += string.digits
+        if options['include_special']:
+            characters += string.punctuation
 
-if not characters:
+        if not characters:
             messagebox.showinfo("Error", "Please select at least one type of character for your password.")
             return
 
-    while True:
-        password = ''.join(random.choice(characters) for i in range(length))
-        if (any(c.islower() for c in password) or not options['include_lowercase']) and \
-           (any(c.isupper() for c in password) or not options['include_uppercase']) and \
-           (any(c.isdigit() for c in password) or not options['include_digits']) and \
-           (any(c in string.punctuation for c in password) or not options['include_special']):
-            break  
+        while True:
+            password = ''.join(random.choice(characters) for i in range(length))
+            if (any(c.islower() for c in password) or not options['include_lowercase']) and \
+               (any(c.isupper() for c in password) or not options['include_uppercase']) and \
+               (any(c.isdigit() for c in password) or not options['include_digits']) and \
+               (any(c in string.punctuation for c in password) or not options['include_special']):
+                break
 
-         password_entry.delete(0, tk.END)
-          password_entry.insert(0, password)
+        password_entry.delete(0, tk.END)
+        password_entry.insert(0, password)
 
     except ValueError:
         messagebox.showinfo("Error", "Please enter a valid number for length.")
