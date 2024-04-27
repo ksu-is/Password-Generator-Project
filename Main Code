@@ -31,18 +31,22 @@ if not characters:
             messagebox.showinfo("Error", "Please select at least one type of character for your password.")
             return
 
-    # Ensuring the password meets complexity requirements
     while True:
         password = ''.join(random.choice(characters) for i in range(length))
         if (any(c.islower() for c in password) or not options['include_lowercase']) and \
            (any(c.isupper() for c in password) or not options['include_uppercase']) and \
            (any(c.isdigit() for c in password) or not options['include_digits']) and \
            (any(c in string.punctuation for c in password) or not options['include_special']):
-            break  # The password is valid
-        else:
-            continue  # Regenerate if the password doesn't meet the criteria
+            break  
 
-    return password
+         password_entry.delete(0, tk.END)
+          password_entry.insert(0, password)
+
+    except ValueError:
+        messagebox.showinfo("Error", "Please enter a valid number for length.")
+
+root = tk.Tk()
+root.title("Password Generator")
 
 def main():
     try:
