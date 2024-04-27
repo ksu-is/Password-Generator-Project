@@ -17,7 +17,6 @@ def generate_password():
             'include_special': special_var.get()
         }
 
-    
     characters = ''
     if options['include_uppercase']:
         characters += string.ascii_uppercase
@@ -28,10 +27,9 @@ def generate_password():
     if options['include_special']:
         characters += string.punctuation
 
-    # Check if the user has selected at least one character type
-    if not characters:
-        print("Please select at least one type of character for your password.")
-        return None
+if not characters:
+            messagebox.showinfo("Error", "Please select at least one type of character for your password.")
+            return
 
     # Ensuring the password meets complexity requirements
     while True:
