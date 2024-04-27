@@ -3,10 +3,12 @@ from tkinter import messagebox
 import random
 import string
 
-def generate_password(length, options):
-    if length < 6:  # Minimum length check for security reasons
-        print("Password length should be at least 6 characters.")
-        return None
+def generate_password():
+    try:
+        length = int(length_var.get())
+        if length < 6:  # Minimum length to Increase security measures
+            messagebox.showinfo("Error", "Password length should be at least 6 characters.")
+            return
 
     # Building the character set based on user preferences
     characters = ''
