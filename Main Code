@@ -10,7 +10,14 @@ def generate_password():
             messagebox.showinfo("Error", "Password length should be at least 6 characters.")
             return
 
-    # Building the character set based on user preferences
+    options = {
+            'include_uppercase': uppercase_var.get(),
+            'include_lowercase': lowercase_var.get(),
+            'include_digits': digits_var.get(),
+            'include_special': special_var.get()
+        }
+
+    
     characters = ''
     if options['include_uppercase']:
         characters += string.ascii_uppercase
